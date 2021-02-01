@@ -1,3 +1,3 @@
 # Nixe - 🐧
 
-Nixe is a dicord bot 🤖
+Nixe is a bot 🤖 for pixeland discord server
