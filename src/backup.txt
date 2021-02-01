@@ -1,0 +1,107 @@
+import { Client, Message } from 'discord.js'
+import dotenv from 'dotenv'
+
+import { prefix } from './config.json'
+
+dotenv.config()
+
+const client: Client = new Client()
+
+client.once('ready', () => {
+  console.log('ready!')
+})
+
+client.on('message', (message: Message): void => {
+  // if (!message.content.startsWith(prefix) || message.author.bot) return await message.channel.send('invalid prefix')
+
+  const args: string[] = message.content.slice(prefix.length).trim().split(/ +/)
+  const command: string | undefined = args.shift()?.toLowerCase()
+
+  if (command === 'args-info') {
+    if (args.length === 0) {
+      // return await message.channel.send(`You didn't provide any arguments, ${message.author}!`)
+    } else if (args[0] === 'foo') {
+      // return await message.channel.send('bar')
+    }
+
+    // return await message.channel.send(`Command: ${command}\nArguments: ${args}`)
+  }
+})
+
+// client.on('message', async (message: Message): Promise<Message> => {
+//   if (!message.content.startsWith(prefix) || message.author.bot) return
+
+//   const args: string[] = message.content.slice(prefix.length).trim().split(/ +/)
+//   const command: string | undefined = args.shift()?.toLowerCase()
+
+//   if (command === 'args-info') {
+//     if (args.length === 0) {
+//       return await message.channel.send(`You didn't provide any arguments, ${message.author}!`)
+//     } else if (args[0] === 'foo') {
+//       return await message.channel.send('bar')
+//     }
+
+//     return await message.channel.send(`Command: ${command}\nArguments: ${args}`)
+//   } else if (command === 'kick') {
+//     if (!message.mentions.users.size) {
+//       return await message.reply('You need to tag a user in order to kick them!')
+//     }
+
+//     const taggedUser = message.mentions.users.first()
+
+//     return await message.channel.send(`You wanted to kick: ${taggedUser}`)
+//   } else {
+//     return await message.channel.send('No command found!')
+//   }
+// })
+
+// client.on('message', message => {
+//   if (message.content === `${prefix}ping`) {
+//     message.channel.send('Pong.')
+//   } else if (message.content === `${prefix}beep`) {
+//     message.channel.send('Boop.')
+//   } else if (message.content === `${prefix}server`) {
+//     message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`)
+//   } else if (message.content === `${prefix}commands`) {
+//     message.channel.send('>ping\n>beep\n>server')
+//   } else if (message.content === `${prefix}user-info`) {
+//     message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`)
+//   } else if (message.content.startsWith(`${prefix}avatar`)) {
+//     const avatar = message.author.displayAvatarURL({ dynamic: true, size: 256 })
+
+//     const embed = new MessageEmbed()
+//       .setColor('#0099ff')
+//       .setTitle('Avatar')
+//       .setAuthor(message.author.username, avatar)
+//       .setDescription(`**${message.author.username}** este es tu avatar!`)
+//       .setImage(avatar)
+//       .setTimestamp()
+
+//     message.channel.send(embed)
+//   } else if (message.content.startsWith(`${prefix}kick`)) {
+//     const taggedUser = message.mentions.users.first()
+
+//     message.channel.send(`You want to kick ${taggedUser}`)
+//   } else if (message.content === `${prefix}happy`) {
+//     message.channel.send('<:peepoHappy:804869025360248884>')
+//   } else if (message.content === `${prefix}bye`) {
+//     message.channel.send('safa no mas ctmr <:PeepoZZZ:804869031697973310>')
+//   } else if (message.content === `${prefix}sad`) {
+//     message.channel.send('<:Sadge:804869024626114560>')
+//   } else if (message.content === `${prefix}pixeland`) {
+//     const exampleEmbed = new MessageEmbed()
+//       .setColor('#9934EF')
+//       .setTitle('PixeLand')
+//       .setURL('https://teampixeland.com')
+//       .setAuthor('Nixe', 'https://i.imgur.com/ZWBYeMp.png', 'https://teampixeland.com')
+//       .setDescription('PixeLand :D')
+//       .setThumbnail('https://i.imgur.com/ZQ7gl8E.png')
+//       .setImage('https://i.imgur.com/Ax4mheU.jpg')
+//       .setTimestamp()
+//       .setFooter('Pixeland', 'https://i.imgur.com/p98TTjY.png')
+
+//     message.channel.send(exampleEmbed)
+//   }
+// })
+
+client.login(process.env.BOT_TOKEN)
